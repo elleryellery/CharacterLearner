@@ -20,33 +20,39 @@ public abstract class PinyinInterpreter {
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(file), "UTF-8"));
-            Scanner sc = new Scanner(in);
-            while(sc.hasNextLine()){
-                String hexadecimal = "";
-                String pinyin = "";
-                String meaning = "";
-                String line = sc.nextLine();
-                for(int i = 0; i < line.length(); i++){
-                    hexadecimal = line.substring(0,line.indexOf(':'));
 
-                    if(line.contains("/")){
-                        pinyin = line.substring(line.indexOf(':') + 3,line.indexOf("/") - 2);
-                        meaning = line.substring(line.indexOf("/") +1);
+            String line;
 
-                    } else if (line.contains("//")){
-
-                    } else {
-                        pinyin = line.substring(line.indexOf(':') + 3,line.length()-2);
-                    }
-                }
-                Character add = new Character(hexadecimal, pinyin);
-                if(meaning.length()>0){
-                    add.addMeaning(meaning);
-                }
+            while((line = in.readLine()) != null){
+                String[] properties = line.split("_");
+                Character add = new Character("0x" + properties[0], properties[1]);
+                add.addMeaning(properties[2]);
                 dictionary.add(add);
+                // String hexadecimal = "";
+                // String pinyin = "";
+                // String meaning = "";
+                // String line = sc.nextLine();
+                // for(int i = 0; i < line.length(); i++){
+                //     hexadecimal = line.substring(0,line.indexOf(':'));
+
+                //     if(line.contains("/")){
+                //         pinyin = line.substring(line.indexOf(':') + 3,line.indexOf("/") - 2);
+                //         meaning = line.substring(line.indexOf("/") +1);
+
+                //     } else if (line.contains("//")){
+
+                //     } else {
+                //         pinyin = line.substring(line.indexOf(':') + 3,line.length()-2);
+                //     }
+                // }
+                // Character add = new Character(hexadecimal, pinyin);
+                // if(meaning.length()>0){
+                //     add.addMeaning(meaning);
+                // }
+                // dictionary.add(add);
             }
-            sc.close();
-    
+            
+            in.close();
             characterDictionary = dictionary;
         } catch(Exception e){
             e.printStackTrace();

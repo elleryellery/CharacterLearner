@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import org.python.apache.html.dom.HTMLModElementImpl;
-
 import java.awt.*;
 
 public abstract class DisplayAssets {

@@ -1,3 +1,5 @@
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 public class Character {
@@ -23,7 +25,13 @@ public class Character {
 
     public void addString(String input){
         character = input;
-        strokeOrderFile = new ImageIcon("StrokeOrder\\" + character + ".gif");
+        strokeOrderFile = new ImageIcon("stroke_order_gifs\\" + character.codePointAt(0) + ".gif");
+    }
+
+    public void hasGif(){
+        if(!(new File("stroke_order_gifs\\" + character.codePointAt(0) + ".gif").isFile())){
+            System.out.println(encoded);
+        }
     }
 
     public String encoded(){
@@ -35,10 +43,6 @@ public class Character {
     }
 
     public String getPinyin(){
-        if (pinyin.contains(",")){
-            return pinyin.substring(0, pinyin.indexOf(","));
-        } else {
-            return pinyin;
-        }
+        return pinyin;
     }
 }

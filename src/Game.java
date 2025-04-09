@@ -25,7 +25,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	private boolean finishedWriting = false;
 	public static boolean assistedDragActive = false;
 	private boolean front = true;
-	private boolean developerMode = true;
+	private boolean developerMode = false;
 
 	private double timer = 0.0;
 	public static long startTime = System.currentTimeMillis();
@@ -188,10 +188,10 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	}
 
 	public void RandomizeCharacter(){
-		// randomCharacter = FileReader.myCharacters.get(
-		// 	(int) (Math.random()*FileReader.myCharacters.size())
-		// );
-		randomCharacter = FileReader.myCharacters.get(index);
+		randomCharacter = FileReader.myCharacters.get(
+			(int) (Math.random()*FileReader.myCharacters.size())
+		);
+		//randomCharacter = FileReader.myCharacters.get(index);
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(new StringSelection(randomCharacter.character + ""), null);
 		index ++;
@@ -200,7 +200,7 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 	public void WritingMode(){
 		ShowCharacterDetails(randomCharacter);
 
-		if(true){
+		if(finishedWriting){
 			DrawCharacterStrokeOrder(randomCharacter, 140, 120);
 		}
 
@@ -343,14 +343,14 @@ public class Game  extends JPanel implements Runnable, KeyListener, MouseListene
 			case WRITING:
 		
 				if(keyChar == ' '){
-					RandomizeCharacter();
-					// if(finishedWriting){
-					// 	RandomizeCharacter();
-					// 	points.clear();
-					// 	finishedWriting = false;
-					// } else {
-					// 	finishedWriting = true;
-					// }
+					//RandomizeCharacter();
+					if(finishedWriting){
+						RandomizeCharacter();
+						points.clear();
+						finishedWriting = false;
+					} else {
+						finishedWriting = true;
+					}
 				}
 
 				break;

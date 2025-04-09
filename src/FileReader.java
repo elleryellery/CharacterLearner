@@ -56,6 +56,7 @@ public abstract class FileReader {
             if(character != null){
                 character.addString(characterString);
                 myCharacters.add(character);
+                character.hasGif();
 
             } else {
                 try {
